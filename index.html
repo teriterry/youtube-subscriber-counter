@@ -34,7 +34,7 @@
 </head>
 <body>
   <button id="loginBtn">Google にログインして登録者数を表示</button>
-  <div id="subscriberCount"></div>
+  <div id="subscriberCount">TEST</div>
 
   <script>
     const CLIENT_ID = '447703056009-5u9n18137gdlknbd5ds1rhr4h6rt4ifs.apps.googleusercontent.com'; // ← ここにあなたのクライアントIDを入力してください
@@ -58,6 +58,8 @@
       }
 
       const data = await response.json();
+      console.log(data);
+
       const count = data.items[0].statistics.subscriberCount;
       document.getElementById("subscriberCount").textContent = `登録者数：${count}`;
     }
