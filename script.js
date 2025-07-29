@@ -73,9 +73,16 @@ $(document).ready(function () {
 
     if (token) {
         $('#loginBtn').hide();
+        $('.target-settings').show();
         $('.stats-container').show();
         getSubscriberCount(token);
         setInterval(() => getSubscriberCount(token), REFRESH_INTERVAL);
+    } else {
+        $('#loginBtn').show();
+        $('.target-settings').hide();
+        $('.stats-container').hide();
+
+        console.log("Token Null")
     }
 
     $('#loginBtn').on('click', function () {
