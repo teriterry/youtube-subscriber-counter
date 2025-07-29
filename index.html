@@ -1,97 +1,94 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-  <meta charset="UTF-8">
-  <title>YouTube チャンネル登録者数</title>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <style>
-    body {
-      background-color: transparent;
-      color: #fff;
-      font-family: sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
+    <meta charset="UTF-8">
+    <title>YouTube チャンネル登録者数</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="./css/rolling-counter.css" />
+    <link rel="stylesheet" href="./style.css" />
 
-    #subscriberCount {
-      font-size: 3em;
-      margin-top: 20px;
-    }
-
-    #loginBtn {
-      padding: 12px 24px;
-      font-size: 1em;
-      background-color: #cc0000;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-  </style>
 </head>
+
 <body>
-  <button id="loginBtn">Google にログインして登録者数を表示</button>
-  <div id="subscriberCount">読み込み中...</div>
+    <button id="loginBtn">Google にログインして登録者数を表示</button>
+    <!-- <div id="subscriberCount">読み込み中...</div> -->
+    <div class="stats-container">
+        <div class="counter" id="subscriberCount"></div>
 
-  <script>
-    const CLIENT_ID = '447703056009-5u9n18137gdlknbd5ds1rhr4h6rt4ifs.apps.googleusercontent.com';
-    const REDIRECT_URI = window.location.href.split('#')[0];
+        <div class="div1"></div>
+        <div class="div2"></div>
+        <div class="div3"></div>
+        <div class="div4"></div>
+        <div class="div5"></div>
+        <div class="div6"></div>
+        <div class="div7"></div>
+        <div class="div8"></div>
+        <div class="div9"></div>
+        <div class="div10"></div>
+    </div>
 
-    function getAccessTokenFromUrl() {
-      const hashParams = new URLSearchParams(window.location.hash.substr(1));
-      return hashParams.get('access_token');
-    }
+    <script>
+        import { RollingCounter } from './js/rolling-counter.js';
+        const subsCounter = new RollingCounter('#subscribers-count', 0);
 
-    async function getSubscriberCount(token) {
-      console.log("📡 Fetching subscriber count...");
-      try {
-        const response = await fetch('https://www.googleapis.com/youtube/v3/channels?part=statistics&mine=true', {
-          headers: {
-            'Authorization': 'Bearer ' + token
-          }
-        });
+        const CLIENT_ID = '447703056009-5u9n18137gdlknbd5ds1rhr4h6rt4ifs.apps.googleusercontent.com';
+        const REDIRECT_URI = window.location.href.split('#')[0];
+        const REFRESH_INTERVAL = 30000; // ← ここで30秒に設定
 
-        const data = await response.json();
-        console.log("📦 API response:", data);
-
-        if (!response.ok || !data.items || data.items.length === 0) {
-          $('#subscriberCount').text('登録者数を取得できませんでした。再度ログインしてください。');
-          return;
+        function getAccessTokenFromUrl() {
+            const hashParams = new URLSearchParams(window.location.hash.substr(1));
+            return hashParams.get('access_token');
         }
 
-        const count = data.items[0].statistics.subscriberCount;
-        $('#subscriberCount').text(`登録者数：${count}`);
-      } catch (err) {
-        console.error(err);
-        $('#subscriberCount').text('エラーが発生しました。');
-      }
-    }
+        async function getSubscriberCount(token) {
+            try {
+                const response = await fetch('https://www.googleapis.com/youtube/v3/channels?part=statistics&mine=true', {
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                });
 
-    $(document).ready(function () {
-      const token = getAccessTokenFromUrl();
-      console.log("🔑 Access token:", token);
+                const data = await response.json();
+                // console.log("📦 データ取得:", data);
 
-      if (token) {
-        $('#loginBtn').hide();
-        getSubscriberCount(token);
-        setInterval(() => getSubscriberCount(token), 30000);
-      }
+                if (!response.ok || !data.items || data.items.length === 0) {
+                    $('#subscriberCount').text('登録者数を取得できませんでした。再度ログインしてください。');
+                    return;
+                }
 
-      $('#loginBtn').on('click', function () {
-        const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?` +
-          `client_id=${CLIENT_ID}&` +
-          `redirect_uri=${encodeURIComponent(REDIRECT_URI)}&` +
-          `response_type=token&` +
-          `scope=https://www.googleapis.com/auth/youtube.readonly&` +
-          `include_granted_scopes=true`;
+                const count = data.items[0].statistics.subscriberCount;
+                // $('#subscriberCount').text(`登録者数：${count}`);
+                subsCounter.update(`${count}`);
 
-        window.location.href = authUrl;
-      });
-    });
-  </script>
+            } catch (err) {
+                console.error("⚠️ エラー:", err);
+                $('#subscriberCount').text('エラーが発生しました。');
+            }
+        }
+
+        $(document).ready(function () {
+            const token = getAccessTokenFromUrl();
+            //   console.log("🔑 アクセストークン:", token);
+
+            if (token) {
+                $('#loginBtn').hide();
+                getSubscriberCount(token);
+                setInterval(() => getSubscriberCount(token), REFRESH_INTERVAL); // ← ここで30秒ごとに更新
+            }
+
+            $('#loginBtn').on('click', function () {
+                const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?` +
+                    `client_id=${CLIENT_ID}&` +
+                    `redirect_uri=${encodeURIComponent(REDIRECT_URI)}&` +
+                    `response_type=token&` +
+                    `scope=https://www.googleapis.com/auth/youtube.readonly&` +
+                    `include_granted_scopes=true`;
+
+                window.location.href = authUrl;
+            });
+        });
+    </script>
 </body>
+
 </html>
