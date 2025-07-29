@@ -40,6 +40,7 @@ async function getSubscriberCount(token) {
 
         } else {
             $('.div1').removeClass('bounce-animation');
+            $('.div3').hide().removeClass('show');
         }
 
 
