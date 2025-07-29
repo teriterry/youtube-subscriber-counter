@@ -1,0 +1,30 @@
+.counter {
+  font-size: 10em;
+  display: flex;
+  line-height: 1em; /* 防止行高导致偏移 */
+}
+
+.digit {
+  position: relative;
+  overflow: hidden;
+
+  width: var(--digit-width, 0.6em);
+  height: var(--digit-height, 1.1em);
+  display: inline-block;
+}
+
+.digits-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.5s ease-in-out;
+}
+
+.digit span {
+  display: block;
+  height: 1.2em;
+  line-height: 1em;
+  font-variant-numeric: tabular-nums; /* 等宽数字，避免位置乱跳 */
+  text-align: center;
+  vertical-align: middle;
+}
