@@ -56,6 +56,7 @@
                 const count = data.items[0].statistics.subscriberCount;
                 // $('#subscriberCount').text(`登録者数：${count}`);
                 subsCounter.update(`${count}`);
+                console.log(`登録者数：${count}`);
 
             } catch (err) {
                 console.error("⚠️ エラー:", err);
@@ -69,6 +70,7 @@
 
             if (token) {
                 $('#loginBtn').hide();
+                $('.stats-container').show();
                 getSubscriberCount(token);
                 setInterval(() => getSubscriberCount(token), REFRESH_INTERVAL); // ← ここで30秒ごとに更新
             }

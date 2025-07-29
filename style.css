@@ -1,13 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop:wght@400&family=Noto+Color+Emoji&family=Noto+Sans+SC:wght@400&family=Noto+Sans+TC:wght@400&family=Noto+Sans+KR:wght@400&family=Noto+Sans:wght@400&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Itim&family=Patrick+Hand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Griffy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@300;400;500&display=swap');
+
 body {
     background-color: transparent;
     color: #fff;
-    font-family: sans-serif;
+    font-family: "Hachi Maru Pop", "Noto Color Emoji", sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
     margin: 0;
+}
+
+@font-face {
+    font-family: "CherryBombOne";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("./font/CherryBombOne-Regular.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: "PopKiwi";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("./font/PopRumKiwi-Telop.otf");
+}
+
+@keyframes moveUpDownItem1 {
+
+    0%,
+    100% {
+        transform: translateY(-50px);
+    }
+
+    50% {
+        transform: translateY(30px);
+    }
+}
+
+:root {
+    --normal-msg-bg-color: #ffec99;
+    --normal-msg-bg-color2: #f5d629;
+    --normal-msg-icon-color: #ffffff;
+
+    --time-color: #fff;
+    --time-text-shadow-color: #929292;
+    --icon-color: #fff;
+
+    --digit-width: 0.85em;
+    --digit-height: 1.1em;
+}
+
+.stats-container {
+    /* display: none; */
+
+    position: relative;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid blue;
+}
+
+#subscriberCount.counter{
+    border: 2px solid blue;
 }
 
 #subscriberCount {
@@ -17,9 +84,11 @@ body {
 }
 
 #loginBtn {
+    display: none;
+
     padding: 12px 24px;
     font-size: 1em;
-    background-color: #cc0000;
+    background-color: #9c7db9;
     color: #fff;
     border: none;
     border-radius: 8px;
