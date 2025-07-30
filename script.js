@@ -29,6 +29,7 @@ async function getSubscriberCount(token) {
         }
 
         const count = data.items[0].statistics.subscriberCount;
+        currentSubscriberCount = count;
         subsCounter.update(`${count}`);
         // console.log(`登録者数：${count}`);
 
@@ -51,6 +52,7 @@ async function getSubscriberCount(token) {
 }
 
 let targetCount = 400000;
+let currentSubscriberCount = 0;
 
 $('.btnTarget').on('click', function () {
     const userInput = parseInt($('#myNumber').val(), 10);
@@ -59,17 +61,23 @@ $('.btnTarget').on('click', function () {
         $('#targetDisplay').text(targetCount);
         // $('.div2').removeClass('show').hide(); // 再設定時に隠す
 
-        $('.div1').removeClass('bounce-animation');
-        $('.div2').hide().removeClass('show');
-        $('.div3').hide().removeClass('show');
+        if (currentSubscriberCount >= targetCount) {
+            $('.div1').addClass('bounce-animation');
+            $('.div3').fadeIn(300).addClass('show');
+        } else {
+            $('.div1').removeClass('bounce-animation');
+            $('.div3').hide().removeClass('show');
+        }
     }
 });
 
 
 $(document).ready(function () {
     const token = getAccessTokenFromUrl();
-    $('.div2').hide();
+
     $('.div1').removeClass('bounce-animation');
+    $('.div2').hide().removeClass('show');
+    $('.div3').hide().removeClass('show');
 
     if (token) {
         $('#loginBtn').hide();
@@ -77,6 +85,7 @@ $(document).ready(function () {
         $('.stats-container').show();
         getSubscriberCount(token);
         setInterval(() => getSubscriberCount(token), REFRESH_INTERVAL);
+
     } else {
         $('#loginBtn').show();
         $('.target-settings').hide();
