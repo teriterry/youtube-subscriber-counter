@@ -6,7 +6,7 @@ window.subsCounter = subsCounter;
 
 const CLIENT_ID = '447703056009-5u9n18137gdlknbd5ds1rhr4h6rt4ifs.apps.googleusercontent.com';
 const REDIRECT_URI = window.location.href.split('#')[0];
-const REFRESH_INTERVAL = 15000;
+const REFRESH_INTERVAL = 5000;
 
 function getAccessTokenFromUrl() {
     const hashParams = new URLSearchParams(window.location.hash.substr(1));
