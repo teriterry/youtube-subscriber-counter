@@ -14,7 +14,14 @@
     <button id="loginBtn">Google にログインして登録者数を表示</button>
 
     <div class="target-settings">
-        <input type="number" id="myNumber" min="0" max="100" step="1" value="0">
+        <div class="target-item">
+            <label for="myNumber">目標登録者数</label>
+            <input type="number" id="myNumber" min="0" step="1" value="0">
+        </div>
+        <div class="target-item">
+            <label for="toggleTarget">目標設定機能 ON/OFF</label>
+            <input type="checkbox" id="toggleTarget" />
+        </div>
         <button class="btnTarget">
             目標設定OK
         </button>
@@ -34,29 +41,71 @@
         <div class="div3"></div>
         <div class="div4"></div>
         <div class="div5"></div>
+        <div class="div6"></div>
+        <div class="div7"></div>
+        <div class="div8"></div>
+        <div class="div9"></div>
+        <div class="div10"></div>
+
+        <div class="div11"></div>
+        <div class="div12"></div>
+        <div class="div13"></div>
+        <div class="div14"></div>
+
+        <div class="div15"></div>
+        <div class="div16"></div>
+        <div class="div17"></div>
+        <div class="div18"></div>
+
+        <div class="div19"></div>
+        <div class="div20"></div>
 
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script type="module" src="./script.js"></script>
 
-    <!-- <script>
+    <script>
         let fakeCount = 399990;
         let targetCount = 400000;
+        let enableTargetCheck = false;
+        let btnClick = false;
+
+        $('.target-container').hide();
+        $('.div2').hide();
+        $('.div15').hide();
+        $('.div16').hide();
+        $('.div19').hide();
 
         $(function () {
-            $('.div2').hide();
-            $('.div1').removeClass('bounce-animation');
+            $('#toggleTarget').on('change', function () {
+                if ($(this).is(':checked')) {
+                    enableTargetCheck = true;
+
+                    $('.target-container').fadeIn(300);
+                } else {
+                    enableTargetCheck = false;
+
+                    $('.target-container').fadeOut(300);
+                    $('.div2').hide();
+                    $('.div11').css({
+                        'background-image': 'url("./img/img2/body1.png")',
+                        'animation': '2s headShake linear infinite'
+                    });
+                    $('.div12').show();
+                    $('.div15').hide();
+                    $('.div16').hide();
+                    $('.div19').hide();
+                }
+            });
 
             $('.btnTarget').on('click', function () {
                 const userInput = parseInt($('#myNumber').val(), 10);
                 if (!isNaN(userInput) && userInput > 0) {
                     targetCount = userInput;
                     $('#targetDisplay').text(targetCount);
-
-                    $('.div2').hide().removeClass('show');
-                    $('.div1').removeClass('bounce-animation');
                 }
+                btnClick = true;
             });
 
             setInterval(function () {
@@ -65,18 +114,33 @@
                 if (window.subsCounter && typeof window.subsCounter.update === 'function') {
                     window.subsCounter.update(fakeCount.toString());
 
-                    if (fakeCount >= targetCount) {
-                        // $('.div2').fadeIn(2000).addClass('show');
-                        $('.div1').addClass('bounce-animation');
-                        $('.div3').fadeIn(300).addClass('show');
+                    if (fakeCount >= targetCount && enableTargetCheck && btnClick) {
+                        // $('.target-container').fadeIn(300);
+                        $('.div2').fadeIn(300);
+                        $('.div11').css({
+                            'background-image': 'url("./img/img2/body2.png")',
+                            'animation': '2s bounce ease-in-out infinite'
+                        });
+                        $('.div12').hide();
+                        $('.div15').show();
+                        $('.div16').show();
+                        $('.div19').show();
                     } else {
-                        $('.div1').removeClass('bounce-animation');
-                        $('.div3').hide().removeClass('show');
+                        // $('.target-container').fadeOut(300);
+                        $('.div2').fadeOut(300);
+                        $('.div11').css({
+                            'background-image': 'url("./img/img2/body1.png")',
+                            'animation': '2s headShake linear infinite'
+                        });
+                        $('.div12').show();
+                        $('.div15').hide();
+                        $('.div16').hide();
+                        $('.div19').hide();
                     }
                 }
             }, 1000);
         });
-    </script> -->
+    </script>
 
 
 

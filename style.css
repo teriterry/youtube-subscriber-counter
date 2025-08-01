@@ -34,15 +34,40 @@ body {
     src: url("./font/PopRumKiwi-Telop.otf");
 }
 
-@keyframes moveUpDownItem1 {
+
+@keyframes swing2 {
 
     0%,
     100% {
-        transform: translateY(-50px);
+        transform: rotate(0deg);
     }
 
     50% {
-        transform: translateY(30px);
+        transform: rotate(-8deg);
+    }
+}
+
+@keyframes swingHand {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(10deg);
+    }
+}
+
+@keyframes swingHand2 {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(-10deg);
     }
 }
 
@@ -89,7 +114,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("./img/back.png");
+    background-image: url("./img/back1.2.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
@@ -101,7 +126,7 @@ body {
     content: "";
     width: 45px;
     height: 45px;
-    top: calc(50% - 28px);
+    top: calc(50% - 33px);
     left: 65px;
 
     --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cg%3E%3Cpath stroke-dasharray='4' stroke-dashoffset='4' d='M12 3v2'%3E%3Canimate fill='freeze' attributeName='stroke-dashoffset' dur='0.2s' values='4;0'/%3E%3C/path%3E%3Cpath stroke-dasharray='28' stroke-dashoffset='28' d='M12 5c-3.31 0 -6 2.69 -6 6l0 6c-1 0 -2 1 -2 2h8M12 5c3.31 0 6 2.69 6 6l0 6c1 0 2 1 2 2h-8'%3E%3Canimate fill='freeze' attributeName='stroke-dashoffset' begin='0.2s' dur='0.4s' values='28;0'/%3E%3C/path%3E%3CanimateTransform fill='freeze' attributeName='transform' begin='0.9s' dur='6s' keyTimes='0;0.05;0.15;0.2;1' type='rotate' values='0 12 3;3 12 3;-3 12 3;0 12 3;0 12 3'/%3E%3C/g%3E%3Cpath stroke-dasharray='8' stroke-dashoffset='8' d='M10 20c0 1.1 0.9 2 2 2c1.1 0 2 -0.9 2 -2'%3E%3Canimate fill='freeze' attributeName='stroke-dashoffset' begin='0.6s' dur='0.2s' values='8;0'/%3E%3CanimateTransform fill='freeze' attributeName='transform' begin='1.1s' dur='6s' keyTimes='0;0.05;0.15;0.2;1' type='rotate' values='0 12 8;6 12 8;-6 12 8;0 12 8;0 12 8'/%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
@@ -122,6 +147,11 @@ body {
     font-weight: bolder;
     margin: 0px 0px 20px 30px;
     color: var(--text-color);
+}
+
+.div1,
+.div3 {
+    display: none;
 }
 
 /* Chibi with Flag */
@@ -147,84 +177,17 @@ body {
     left: -135px;
     width: 200px;
     height: 200px;
-    background-image: url("./img/text.png");
+    background-image: url("./img/text2.png");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center top;
 
     animation: 2s bounce ease-in-out infinite;
-}
-
-.bounce-animation {
-    position: absolute;
-    content: "";
-    width: 400px;
-    height: 400px;
-    animation: bounce 2s ease-in-out infinite;
 }
 
 body {
     overflow: hidden !important;
 }
-
-.div2 {
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-
-    /* filter: drop-shadow(0px 0px 13px var(--box-shadow-color)); */
-}
-
-/* Target Effect 1 */
-.div2::before {
-    position: absolute;
-    content: "";
-    top: 0px;
-    left: -100px;
-    width: calc(100% + 200px);
-    height: 280px;
-    background-image: url("./img/chibi1.png"), url('./img/chibi2.png');
-    background-repeat: no-repeat;
-    background-size: 180px auto;
-    background-position: 0px bottom, calc(100%) bottom;
-    /* border: 2px solid red; */
-
-    animation: 2s headShake ease-in-out infinite;
-    transform-origin: center center;
-}
-
-/* Target Effect Font */
-.div2::after {
-    position: absolute;
-    content: "";
-    top: -50px;
-    left: 0;
-    width: calc(100%);
-    height: 200px;
-    background-image: url("./img/text.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center top;
-
-    animation: 2s bounce ease-in-out infinite;
-}
-
-.div2,
-.div3 {
-    display: none;
-    opacity: 0;
-    transition: opacity 300ms ease;
-}
-
-.div2.show,
-.div3.show {
-    display: block;
-    opacity: 1;
-}
-
 
 /* ---------- Target Setting ---------------- */
 
@@ -235,8 +198,8 @@ body {
     font-family: 'CherryBombOne', 'Hachi Maru Pop', sans-serif;
     font-size: 24px;
     position: absolute;
-    top: 60px;
-    left: 275px;
+    top: 35px;
+    left: 265px;
     padding: 10px 45px;
     border-radius: 60px;
     display: flex;
@@ -247,7 +210,7 @@ body {
     /* transform: rotate(-12deg); */
     animation: 300ms rotateZoomIn ease-in-out both;
 
-    z-index: 10;
+    z-index: 100;
 }
 
 .target-container span:nth-child(1) {
@@ -292,30 +255,40 @@ body {
     /* 控制整体高度，便于裁剪 */
 }
 
-.target-settings input[type="number"] {
-    width: 80px;
-    height: 28px;
+.target-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.target-item label {
+    color: #fff;
+    font-size: 13px;
+}
+
+.target-item input {
+    width: 60px;
+    height: 24px;
     padding: 2px 4px;
-    font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
-.target-settings .btnTarget {
-    padding: 4px 10px;
-    font-size: 14px;
-    background-color: #e74c3c;
+.btnTarget {
+    padding: 4px 8px;
+    height: 30px;
+    font-size: 13px;
+    background-color: #3498db;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    height: 30px;
-    transition: background-color 0.2s;
 }
 
-.target-settings .btnTarget:hover {
-    background-color: #c0392b;
+.btnTarget:hover {
+    background-color: #2980b9;
 }
+
 
 #loginBtn {
     display: none;
@@ -327,4 +300,259 @@ body {
     border: none;
     border-radius: 8px;
     cursor: pointer;
+}
+
+.div9{
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    left: 365px;
+    top: 70px;
+}
+
+/* ribbon left */
+.div9::before {
+    position: absolute;
+    content: "";
+    width: 120px;
+    height: 200px;
+    top: 35px;
+    left: -35px;
+    background-image: url("./img/ribbon1.1.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    transform: rotate(-20deg);
+    z-index: 20;
+}
+
+.div9::after {
+    position: absolute;
+    content: "";
+    width: 120px;
+    height: 200px;
+    top: 55px;
+    left: -55px;
+    background-image: url("./img/ribbon1.2.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: top center;
+    animation: 3s swing2 ease-in-out infinite;
+    transform-origin: top left;
+}
+
+/* ----------------- Target Achieved Effect ---------------------- */
+
+/* Body Left */
+.div11 {
+    position: absolute;
+    content: "";
+    width: 260px;
+    height: 260px;
+    top: 100px;
+    left: -160px;
+    background-image: url("./img/img2/body1.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    z-index: 10;
+    animation: 2s headShake linear infinite;
+    filter: drop-shadow(8px 0px 0px #fff);
+
+    /* border: 2px solid blue; */
+}
+
+.div12 {
+    position: absolute;
+    content: "";
+    width: 260px;
+    height: 260px;
+    top: 100px;
+    left: -160px;
+    z-index: 150;
+    animation: 2s headShake linear infinite;
+}
+
+/* Hand Left */
+.div12::before {
+    position: absolute;
+    content: "";
+    width: 260px;
+    height: 260px;
+    top: 0px;
+    left: 0px;
+    background-image: url("./img/img2/hand1.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+
+    animation: 1.5s swingHand ease-in-out infinite;
+    transform-origin: center calc(50%);
+
+    /* border: 2px solid blue; */
+}
+
+/* Flag Left */
+.div12::after {
+    position: absolute;
+    content: "";
+    width: 260px;
+    height: 260px;
+    top: 0px;
+    left: 0px;
+    background-image: url("./img/img2/flag1.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+
+    animation: 1.5s swingHand ease-in-out infinite;
+    transform-origin: center calc(50%);
+
+    /* border: 2px solid blue; */
+}
+
+/* Target Achieved Hand Left */
+.div15 {
+    position: absolute;
+    content: "";
+    width: 260px;
+    height: 260px;
+    top: 100px;
+    left: -160px;
+    z-index: 150;
+
+    animation: 2s bounce ease-in-out infinite;
+    /* animation: 2s headShake linear infinite; */
+}
+
+/* Left: Hand Left */
+.div15::before {
+    position: absolute;
+    content: "";
+    width: 260px;
+    height: 260px;
+    top: 0px;
+    left: 0px;
+    background-image: url("./img/img2/hand2.1.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+
+    animation: 1.5s swingHand ease-in-out infinite;
+    transform-origin: center calc(50%);
+
+    /* border: 2px solid blue; */
+}
+
+/* Left: Hand Right */
+.div15::after {
+    position: absolute;
+    content: "";
+    width: 260px;
+    height: 260px;
+    top: 0px;
+    left: 0px;
+    background-image: url("./img/img2/hand2.2.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+
+    animation: 1.5s swingHand2 ease-in-out infinite;
+    transform-origin: center calc(50%);
+
+    /* border: 2px solid blue; */
+}
+
+/* Target Achieved Flag Left */
+.div16 {
+    position: absolute;
+    content: "";
+    width: 260px;
+    height: 260px;
+    top: 35px;
+    left: -180px;
+    z-index: 150;
+    background-image: url("./img/img2/flag2.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center bottom;
+
+    animation: 1.5s pulse ease-in-out infinite;
+    /* animation: 2s headShake linear infinite; */
+}
+
+/* Chibi + Text */
+.div2 {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 500;
+    filter: drop-shadow(0px 0px 13px #fff);
+
+    /* border: 2px solid blue; */
+}
+
+/* Target Effect 1 */
+.div2::before {
+    position: absolute;
+    content: "";
+    top: 20px;
+    left: -100px;
+    width: calc(100% + 200px);
+    height: 280px;
+    background-image: url("./img/chibi1.png"), url('./img/chibi2.png');
+    background-repeat: no-repeat;
+    background-size: 180px auto;
+    background-position: 0px bottom, calc(100%) bottom;
+
+    animation: 2s headShake ease-in-out infinite;
+    animation-delay: 1s;
+    transform-origin: center center;
+}
+
+/* Target Effect Font */
+.div2::after {
+    position: absolute;
+    content: "";
+    top: 50px;
+    left: -30px;
+    width: 300px;
+    height: 200px;
+    background-image: url("./img/text2.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center top;
+
+    animation: 3s tada ease-in-out infinite;
+}
+
+.div19 {
+    position: absolute;
+    content: "";
+    width: 500px;
+    height: 300px;
+    top: 65px;
+    left: -100px;
+    /* border: 2px solid blue; */
+    z-index: 200;
+}
+
+.div19::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-image: url("./img/kira_single1.png"), url("./img/kira_single1.png");
+    background-repeat: no-repeat;
+    background-size: 80px auto, 120px auto;
+    background-position: 15px 0px, calc(100% - 80px) calc(100% - 15px);
+    /* filter: 
+    drop-shadow(0px 0px 8px #ffde24)
+    drop-shadow(0px 0px 3px #ffde24)
+    drop-shadow(0px 0px 1px #ffde24); */
+    filter: brightness(0%) invert(69%) sepia(15%) saturate(6793%) hue-rotate(224deg) brightness(74%) contrast(88%);
 }

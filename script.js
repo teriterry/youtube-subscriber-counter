@@ -13,6 +13,8 @@ function getAccessTokenFromUrl() {
     return hashParams.get('access_token');
 }
 
+let enableTargetCheck = false;
+
 async function getSubscriberCount(token) {
     try {
         const response = await fetch('https://www.googleapis.com/youtube/v3/channels?part=statistics&mine=true', {
@@ -34,16 +36,11 @@ async function getSubscriberCount(token) {
         // console.log(`登録者数：${count}`);
 
         // 🎯 目標達成チェック
-        if (count >= targetCount) {
-            // $('.div2').fadeIn(300).addClass('show');
-            $('.div1').addClass('bounce-animation');
-            $('.div3').fadeIn(300).addClass('show');
+        if (count >= targetCount && enableTargetCheck) {
 
         } else {
-            $('.div1').removeClass('bounce-animation');
-            $('.div3').hide().removeClass('show');
-        }
 
+        }
 
     } catch (err) {
         console.error("⚠️ エラー:", err);
@@ -59,14 +56,29 @@ $('.btnTarget').on('click', function () {
     if (!isNaN(userInput) && userInput > 0) {
         targetCount = userInput;
         $('#targetDisplay').text(targetCount);
-        // $('.div2').removeClass('show').hide(); // 再設定時に隠す
 
         if (currentSubscriberCount >= targetCount) {
-            $('.div1').addClass('bounce-animation');
-            $('.div3').fadeIn(300).addClass('show');
+            // $('.target-container').fadeIn(300);
+            $('.div2').fadeIn(300);
+            $('.div11').css({
+                'background-image': 'url("./img/img2/body2.png")',
+                'animation': '2s bounce ease-in-out infinite'
+            });
+            $('.div12').hide();
+            $('.div15').show();
+            $('.div16').show();
+            $('.div19').show();
         } else {
-            $('.div1').removeClass('bounce-animation');
-            $('.div3').hide().removeClass('show');
+            // $('.target-container').fadeOut(300);
+            $('.div2').fadeOut(300);
+            $('.div11').css({
+                'background-image': 'url("./img/img2/body1.png")',
+                'animation': '2s headShake linear infinite'
+            });
+            $('.div12').show();
+            $('.div15').hide();
+            $('.div16').hide();
+            $('.div19').hide();
         }
     }
 });
@@ -74,10 +86,32 @@ $('.btnTarget').on('click', function () {
 
 $(document).ready(function () {
     const token = getAccessTokenFromUrl();
+    $('.target-container').hide();
+    $('.div2').hide();
+    $('.div15').hide();
+    $('.div16').hide();
+    $('.div19').hide();
 
-    $('.div1').removeClass('bounce-animation');
-    $('.div2').hide().removeClass('show');
-    $('.div3').hide().removeClass('show');
+    /* Checkbox Toggle Event */
+    $('#toggleTarget').on('change', function () {
+        if ($(this).is(':checked')) {
+            enableTargetCheck = true;
+            $('.target-container').fadeIn(300);
+        } else {
+            enableTargetCheck = false;
+
+            $('.target-container').fadeOut();
+            $('.div2').hide();
+            $('.div11').css({
+                'background-image': 'url("./img/img2/body1.png")',
+                'animation': '2s headShake linear infinite'
+            });
+            $('.div12').show();
+            $('.div15').hide();
+            $('.div16').hide();
+            $('.div19').hide();
+        }
+    });
 
     if (token) {
         $('#loginBtn').hide();
@@ -90,6 +124,10 @@ $(document).ready(function () {
         $('#loginBtn').show();
         $('.target-settings').hide();
         $('.stats-container').hide();
+
+        // $("#loginBtn").hide();
+        // $('.target-settings').show();
+        // $('.stats-container').show();
 
         console.log("Token Null")
     }
