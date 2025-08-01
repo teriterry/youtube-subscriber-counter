@@ -51,39 +51,6 @@ async function getSubscriberCount(token) {
 let targetCount = 400000;
 let currentSubscriberCount = 0;
 
-$('.btnTarget').on('click', function () {
-    const userInput = parseInt($('#myNumber').val(), 10);
-    if (!isNaN(userInput) && userInput > 0) {
-        targetCount = userInput;
-        $('#targetDisplay').text(targetCount);
-
-        if (currentSubscriberCount >= targetCount) {
-            // $('.target-container').fadeIn(300);
-            $('.div2').fadeIn(300);
-            $('.div11').css({
-                'background-image': 'url("./img/img2/body2.png")',
-                'animation': '2s bounce ease-in-out infinite'
-            });
-            $('.div12').hide();
-            $('.div15').show();
-            $('.div16').show();
-            $('.div19').show();
-        } else {
-            // $('.target-container').fadeOut(300);
-            $('.div2').fadeOut(300);
-            $('.div11').css({
-                'background-image': 'url("./img/img2/body1.png")',
-                'animation': '2s headShake linear infinite'
-            });
-            $('.div12').show();
-            $('.div15').hide();
-            $('.div16').hide();
-            $('.div19').hide();
-        }
-    }
-});
-
-
 $(document).ready(function () {
     const token = getAccessTokenFromUrl();
     $('.target-container').hide();
@@ -91,6 +58,38 @@ $(document).ready(function () {
     $('.div15').hide();
     $('.div16').hide();
     $('.div19').hide();
+
+    $('.btnTarget').on('click', function () {
+        const userInput = parseInt($('#myNumber').val(), 10);
+        if (!isNaN(userInput) && userInput > 0) {
+            targetCount = userInput;
+            $('#targetDisplay').text(targetCount);
+
+            if (currentSubscriberCount >= targetCount && enableTargetCheck) {
+                // $('.target-container').fadeIn(300);
+                $('.div2').fadeIn(300);
+                $('.div11').css({
+                    'background-image': 'url("./img/img2/body2.png")',
+                    'animation': '2s bounce ease-in-out infinite'
+                });
+                $('.div12').hide();
+                $('.div15').show();
+                $('.div16').show();
+                $('.div19').show();
+            } else {
+                // $('.target-container').fadeOut(300);
+                $('.div2').fadeOut(300);
+                $('.div11').css({
+                    'background-image': 'url("./img/img2/body1.png")',
+                    'animation': '2s headShake linear infinite'
+                });
+                $('.div12').show();
+                $('.div15').hide();
+                $('.div16').hide();
+                $('.div19').hide();
+            }
+        }
+    });
 
     /* Checkbox Toggle Event */
     $('#toggleTarget').on('change', function () {
