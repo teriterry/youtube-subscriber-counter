@@ -98,12 +98,12 @@ $(document).ready(function () {
     $('#toggleTarget').on('change', function () {
         if ($(this).is(':checked')) {
             enableTargetCheck = true;
-            
+
             $('.target-container').fadeIn(300);
             $('.div11').css({
                 'background-image': 'url("./img/img2/body1.png")',
                 'animation': '2s headShake linear infinite'
-            });
+            }).show();
             $('.div12').show();
         } else {
             enableTargetCheck = false;
@@ -117,6 +117,7 @@ $(document).ready(function () {
             // $('.div12').show();
             $(".div11").hide();
             $(".div12").hide();
+            
             $('.div15').hide();
             $('.div16').hide();
             $('.div19').hide();
