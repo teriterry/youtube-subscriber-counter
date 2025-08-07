@@ -74,7 +74,7 @@ $(document).ready(function () {
                 $('.div11').css({
                     'background-image': 'url("./img/img2/body2.png")',
                     'animation': '2s bounce ease-in-out infinite'
-                });
+                }).show();
                 $('.div12').hide();
                 $('.div15').show();
                 $('.div16').show();
@@ -85,7 +85,7 @@ $(document).ready(function () {
                 $('.div11').css({
                     'background-image': 'url("./img/img2/body1.png")',
                     'animation': '2s headShake linear infinite'
-                });
+                }).show();
                 $('.div12').show();
                 $('.div15').hide();
                 $('.div16').hide();
@@ -117,7 +117,7 @@ $(document).ready(function () {
             // $('.div12').show();
             $(".div11").hide();
             $(".div12").hide();
-            
+
             $('.div15').hide();
             $('.div16').hide();
             $('.div19').hide();
