@@ -59,6 +59,9 @@ $(document).ready(function () {
     $('.div16').hide();
     $('.div19').hide();
 
+    $(".div11").hide();
+    $(".div12").hide();
+
     $('.btnTarget').on('click', function () {
         const userInput = parseInt($('#myNumber').val(), 10);
         if (!isNaN(userInput) && userInput > 0) {
@@ -101,11 +104,13 @@ $(document).ready(function () {
 
             $('.target-container').fadeOut();
             $('.div2').hide();
-            $('.div11').css({
-                'background-image': 'url("./img/img2/body1.png")',
-                'animation': '2s headShake linear infinite'
-            });
-            $('.div12').show();
+            // $('.div11').css({
+            //     'background-image': 'url("./img/img2/body1.png")',
+            //     'animation': '2s headShake linear infinite'
+            // });
+            // $('.div12').show();
+            $(".div11").hide();
+            $(".div12").hide();
             $('.div15').hide();
             $('.div16').hide();
             $('.div19').hide();
