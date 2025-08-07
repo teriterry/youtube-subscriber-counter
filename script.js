@@ -98,7 +98,13 @@ $(document).ready(function () {
     $('#toggleTarget').on('change', function () {
         if ($(this).is(':checked')) {
             enableTargetCheck = true;
+            
             $('.target-container').fadeIn(300);
+            $('.div11').css({
+                'background-image': 'url("./img/img2/body1.png")',
+                'animation': '2s headShake linear infinite'
+            });
+            $('.div12').show();
         } else {
             enableTargetCheck = false;
 
